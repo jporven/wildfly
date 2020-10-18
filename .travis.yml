@@ -16,7 +16,7 @@ install:
 
 script:
 - cd ../ && mv wildfly inkatze.wildfly && cd inkatze.wildfly
-- pipenv run molecule test
+- pipenv run molecule test --all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

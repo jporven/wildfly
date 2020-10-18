@@ -23,6 +23,7 @@ Defaults:
     wildfly_download_url: "{{ wildfly_base_download_url }}/{{ wildfly_version }}/\
                         {{ wildfly_download_file }}"
     wildfly_download_dir: /tmp
+    wildfly_download_local: false
 
     wildfly_install_dir: /opt
     wildfly_dir: "{{ wildfly_install_dir }}/{{ wildfly_name }}"

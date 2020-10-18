@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+    - name: wildfly-centos8-20.0.1
+      image: centos:8
+      command: /sbin/init
+      tmpfs:
+        - /run
+        - /tmp
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      dockerfile: ../default/Dockerfile.j2
+provisioner:
+  name: ansible
+  inventory:
+    host_vars:
+      wildfly-centos8-20.0.1:
+        ansible_user: ansible
+        wildfly_version: 20.0.1.Final
+    group_vars:
+      all:
+        wildfly_download_local: true
+        wildfly_remove_download_file: False
+        wildfly_management_users:
+          - { name: 'david', password: 'ruomlig' }
+          - { name: 'roger', password: 'sretaw' }
+        wildfly_app_users:
+          - { name: 'rich', password: 'thgirw' }
+          - { name: 'nick', password: 'nosam' }
+        wildfly_custom_properties:
+          jboss.node.name: wildfly-group
+        wildfly_custom_environment:
+          STARTUP_WAIT: 2
+          SHUTDOWN_WAIT: 2
+        wildfly_temp_dir: /opt/wildfly/standalone/tmp
+verifier:
+  name: ansible
